@@ -1,4 +1,4 @@
-import pygame, time, random
+import pygame, time, random, math
 from squares import *
 
 pygame.init()
@@ -18,27 +18,11 @@ font = pygame.font.Font(None, 50)
 
 clock = pygame.time.Clock()
 
-'''
-# spaces = [[0,0,0,0],                                          
-            [0,0,0,0], 
-            [0,0,0,0]]
-'''
-# Make the board with values 0
-spaces = []
-rows, cols = (10, 8)
-for i in range(rows):
-  row = []
-  for j in range(cols):
-    row.append(0)
-  spaces.append(row)
 
-print(spaces)
-
-print(len(spaces))
 
 allSquares = pygame.sprite.Group()
 
-spaces[1][2] = 1
+#spaces[1][2] = 1
 
 for i in range(len(spaces)):
     for j in range(cols):
@@ -46,7 +30,12 @@ for i in range(len(spaces)):
 
         allSquares.add(block)
 
+start_ticks = pygame.time.get_ticks()
+seconds = 0
+
 while running:
+    seconds = round((pygame.time.get_ticks() - start_ticks) / 10)
+    print(seconds)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -59,7 +48,11 @@ while running:
     text = font.render("TETRIS", True, GREEN)
     screen.blit(text, [160, 20])
     allSquares.draw(screen)
-
+    for i in range(len(allSquares.sprites())):
+        allSquares.sprites()[i].updateColor()
+    if seconds % 300 == 0 and seconds != 0:
+        #moveCurrentBlock()
+        print(seconds)
     pygame.display.flip()
     clock.tick(30)
 
