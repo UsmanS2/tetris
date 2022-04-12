@@ -1,6 +1,32 @@
 import pygame
+from random import *
 
 GRAY = (150,150,150)
+LIGHTBLUE = (120, 167, 255)
+
+BLOCKS = ["I", "J", "L", "O", "Z", "S", "T"]
+
+IBlock = [0, 3],[1, 3], [2, 3], [3, 3]
+
+currentBlock = []
+
+'''
+# spaces = [[0,0,0,0],                                          
+            [0,0,0,0], 
+            [0,0,0,0]]
+'''
+# Make the board with values 0
+spaces = []
+rows, cols = (10, 8)
+for i in range(rows):
+  row = []
+  for j in range(cols):
+    row.append(0)
+  spaces.append(row)
+
+#print(spaces)
+
+#print(len(spaces))
 
 class Square(pygame.sprite.Sprite):
   # Constructor function
@@ -12,3 +38,26 @@ class Square(pygame.sprite.Sprite):
     self.rect.x = x
     self.rect.y = y
     self.index = [row,column]
+
+  def updateColor(self):
+    for i in range(len(currentBlock[0])):
+      spaces[currentBlock[0][i][0]][currentBlock[0][i][1]] = 1
+    if spaces[self.index[0]][self.index[1]] != 0:
+      if spaces[self.index[0]][self.index[1]] == 1:
+        self.image.fill(LIGHTBLUE)
+
+def createNewBlock():
+  blockChoice = choice(BLOCKS)
+  blockChoice = "I"
+  if blockChoice == "I":
+    currentBlock.append(IBlock)
+
+def moveCurrentBlock():
+  for i in range(4):
+    currentBlock[0][i][0] += 1
+    print(currentBlock[0][i][0])
+
+createNewBlock()
+print(len(currentBlock[0]))
+print(currentBlock[0][0])
+
