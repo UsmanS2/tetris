@@ -34,7 +34,7 @@ start_ticks = pygame.time.get_ticks()
 seconds = 0
 
 while running:
-    seconds = round((pygame.time.get_ticks() - start_ticks) / 10)
+    seconds = math.floor((math.floor(pygame.time.get_ticks()) - math.floor(start_ticks)) / 10)
     print(seconds)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
