@@ -32,10 +32,14 @@ for i in range(len(spaces)):
 
 start_ticks = pygame.time.get_ticks()
 seconds = 0
-
+c = 0
 while running:
-    seconds = math.floor((math.floor(pygame.time.get_ticks()) - math.floor(start_ticks)) / 10)
-    print(seconds)
+    c += 1
+    seconds = round((math.floor(pygame.time.get_ticks()) - math.floor(start_ticks)) / 10)
+
+    if seconds % 2 != 0:
+        seconds += 1
+    #print(c)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -50,9 +54,9 @@ while running:
     allSquares.draw(screen)
     for i in range(len(allSquares.sprites())):
         allSquares.sprites()[i].updateColor()
-    if seconds % 300 == 0 and seconds != 0:
-        #moveCurrentBlock()
-        print(seconds)
+    if c % 30 == 0 and seconds != 0:
+        moveCurrentBlock()
+        print(c)
     pygame.display.flip()
     clock.tick(30)
 

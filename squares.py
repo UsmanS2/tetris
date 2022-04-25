@@ -40,8 +40,9 @@ class Square(pygame.sprite.Sprite):
     self.index = [row,column]
 
   def updateColor(self):
-    for i in range(len(currentBlock[0])):
-      spaces[currentBlock[0][i][0]][currentBlock[0][i][1]] = 1
+    if len(currentBlock[0]) > 0:
+      for i in range(len(currentBlock[0])):
+        spaces[currentBlock[0][i][0]][currentBlock[0][i][1]] = 1
     if spaces[self.index[0]][self.index[1]] != 0:
       if spaces[self.index[0]][self.index[1]] == 1:
         self.image.fill(LIGHTBLUE)
@@ -56,7 +57,13 @@ def moveCurrentBlock():
   for i in range(4):
     currentBlock[0][i][0] += 1
     print("loop " + str(i) + ": " + str(currentBlock[0][i]))
+    if currentBlock[0][i][0] > 8:
+      removeCurrentBlock()
   print("-------")
+
+def removeCurrentBlock():
+  currentBlock.clear()
+  print("Current Block: " + currentBlock)
 
 createNewBlock()
 print(len(currentBlock[0]))
