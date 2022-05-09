@@ -63,7 +63,7 @@ def moveCurrentBlock():
 
 def removeCurrentBlock():
   currentBlock.clear()
-  print("Current Block: " + currentBlock)
+  print("Current Block: " + str(currentBlock))
 
 createNewBlock()
 print(len(currentBlock[0]))
